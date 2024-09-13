@@ -1,0 +1,30 @@
+name: CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      variable1:
+        description: 'this variable is for input'
+        type: string
+        required: true
+        default: 'hello'
+      check:
+        description: 'this variable is for input'
+        required: true
+        default: 'false'
+ 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run a one-line script
+        run: echo "value from the user" ${{ github.event.inputs.variable1 }}
+  control-job:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.check == 'true }}
+    steps:
+      - name: Run a one-line script
+        run: echo "value from the user ${{ github.event.inputs.check }}"
