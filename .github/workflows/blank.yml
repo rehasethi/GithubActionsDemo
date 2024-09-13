@@ -1,4 +1,4 @@
-name: CI
+name: Controlflow
 on:
   push:
     branches: [ "main" ]
